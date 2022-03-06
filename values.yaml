@@ -1,0 +1,12 @@
+image:
+  name: "huertalv/product-service"
+  tag: "1.0.0"
+
+
+resources:
+  limits:
+    cpu: 1
+    memory: 700Mi
+  requests:
+    cpu: 100m
+    memory: 500Mi

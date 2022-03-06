@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "product-service.name" . }}
+  labels:
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+        release: {{ .Release.Name }}
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    release: {{ .Release.Name }}
+                topologyKey: kubernetes.io/hostname
+      containers:
+      - name: {{ template "product-service.name" . }}
+        image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        imagePullPolicy: Always
+        env:
+        - name: REVIEW_SERVICE_URL
+          value: "http://product-review:8081"
+        securityContext:
+          capabilities:
+            drop:
+            - CHOWN
+            - NET_RAW
+            - SETPCAP
+        resources:
+          limits:
+            cpu: {{ .Values.resources.limits.cpu}}
+            memory: {{ .Values.resources.limits.memory }}
+          requests:
+            cpu: {{ .Values.resources.requests.cpu}}
+            memory: {{ .Values.resources.requests.memory }}
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 10
+          timeoutSeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 5
+          timeoutSeconds: 10
+        ports:
+        - containerPort: 8080
