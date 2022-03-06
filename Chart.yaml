@@ -1,7 +1,7 @@
 apiVersion: v1
 appVersion: "1.0.0"
 name: product-service
-version: 1.0.0
+version: 1.1.0
 description: Product Service Chart
 keywords:
 - product-service
