@@ -3,18 +3,15 @@ kind: Deployment
 metadata:
   name: {{ template "product-service.name" . }}
   labels:
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     release: {{ .Release.Name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      chart: {{ .Chart.Name }}-{{ .Chart.Version }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        chart: {{ .Chart.Name }}-{{ .Chart.Version }}
         release: {{ .Release.Name }}
     spec:
       affinity:

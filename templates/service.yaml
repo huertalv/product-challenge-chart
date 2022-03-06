@@ -3,11 +3,9 @@ kind: Service
 metadata:
   name: {{ template "product-service.name" . }}
   labels:
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     release: {{ .Release.Name }}
 spec:
   selector:
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     release: {{ .Release.Name }}
   ports:
   - protocol: TCP

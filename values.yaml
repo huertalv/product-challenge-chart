@@ -11,5 +11,10 @@ resources:
     cpu: 100m
     memory: 500Mi
 
+hpa:
+  minReplicas: 1
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 100
+
 host: product-app-testing
 port: 8080
