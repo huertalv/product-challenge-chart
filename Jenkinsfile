@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([file(credentialsId: k8sCredentialId, variable: 'KUBECONFIG')]) {
-                        sh "${WORKSPACE}/linux-amd64/helm upgrade -i --atomic ${helmReleaseName} ./ --namespace ${k8sNamespace} --values custom_values.yaml --kube-context=${k8sContext}"
+                        sh "${WORKSPACE}/linux-amd64/helm upgrade -i --atomic ${helmReleaseName} ./ --namespace ${k8sNamespace} --kube-context=${k8sContext}"
                     }
                 }
             }
