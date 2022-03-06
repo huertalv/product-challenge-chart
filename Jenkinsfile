@@ -15,21 +15,38 @@ pipeline {
         label 'incubation'
     }
 
-    stages {
-        stage ('Install Helm') {
-            steps {
-                sh "wget -O helm.tar.gz ${defaultHelmUrl} && tar -zxvf helm.tar.gz"
-            }
-        }
+    options {
+      skipDefaultCheckout true
+    }
 
-        stage('Install Helm Chart From Repository') {
-            steps {
-                script {
-                    withCredentials([file(credentialsId: k8sCredentialId, variable: 'KUBECONFIG')]) {
-                        sh "${WORKSPACE}/linux-amd64/helm upgrade -i --atomic ${helmReleaseName} ./ --namespace ${k8sNamespace} --kube-context=${k8sContext}"
-                    }
-                }
-            }
+    stages {
+
+      stage('Checkout repository') {
+        steps {
+          dir('chart') {
+            checkout scm
+            sh 'rm -rf .git && rm Jenkinsfile'
+          }
         }
+      }
+
+      stage ('Install Helm') {
+        steps {
+          sh "wget -O helm.tar.gz ${defaultHelmUrl} && tar -zxvf helm.tar.gz"
+        }
+      }
+
+      stage('Install Helm Chart From Repository') {
+        steps {
+          dir('chart') {
+            script {
+              withCredentials([file(credentialsId: k8sCredentialId, variable: 'KUBECONFIG')]) {
+                sh "${WORKSPACE}/linux-amd64/helm upgrade -i --atomic ${helmReleaseName} ./ --namespace ${k8sNamespace} --kube-context=${k8sContext}"
+              }
+            }
+          }
+        }
+      }
+
     }
 }
