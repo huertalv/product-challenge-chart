@@ -4,8 +4,8 @@ def branchChartVersion = 'main'
 
 // Project parameters
 def helmReleaseName = 'product-service'
-def k8sContext = 'holmes-new'
-def k8sNamespace = 'playground'
+def k8sContext = 'k8s-context'
+def k8sNamespace = 'k8s-namespace'
 
 def k8sCredentialId = 'kubeconfig'
 
