@@ -4,8 +4,8 @@ def chartVersion = '1.2.0'
 
 // Project parameters
 def helmReleaseName = 'product-service'
-def k8sContext = 'holmes-new'
-def k8sNamespace = 'playground'
+def k8sContext = 'your_k8s_context'
+def k8sNamespace = 'your_k8s_namespace'
 
 // Registry Credentials
 def registry = 'https://my.registry.url/chartrepo/product-service'
