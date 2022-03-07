@@ -65,3 +65,10 @@ For this topic I would consider different options depending on the criticality o
 3. If we can show no information in case of failure, then I would change the Exception treatment to return an empty response and avoid returning RuntimeExceptions.
 
 The best option would be using all the points, but if that is not possible we can use those that could be accepted by business people.
+
+For the second point, as the app is developed in Java, it's possible to use [Spring Cache](https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/cache.html) that will help developers to implement the appropriate cache system according to business needs:
+1. In memory
+2. JCache
+3. Couchbase
+4. Redis
+5. etc
