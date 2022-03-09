@@ -33,6 +33,12 @@ To improve Obserbavility I would:
 1. Send the logs to Elasticsearch/OpenSearch to be able to search over them using all the capabilities provided by Kibana/OpenSearch-Dashboards.
 2. Export metrics to a Prometheus, those metrics would include service availability, request time, number of requests, etc. In the end all the metrics we consider useful to avoid possible problem or even detect points of improvement as bottle necks, common issues...
 
+![Monitoring Infra](./monitoring-infra.png)
+
+In addition we can take advantage of [Prometheus Operator](https://prometheus-operator.dev/), we can install it using command line and help us to manage instances of Prometheus using configuration. Once we have configured Prometheus using the Operator, we can configure ServiceMonitors, PodMonitors, PrometheusRules inside the deployment of our application.
+
+![Prometheus Operator](./prometheus_operator_example.png)
+
 * SLOs: Our stakeholders expect to receive product data 99.5% of the requests that they made 
 to product-service within 200ms. Describe how would you measure and alert to ensure SLOs 
 are accomplished.
