@@ -43,9 +43,11 @@ In addition we can take advantage of [Prometheus Operator](https://prometheus-op
 to product-service within 200ms. Describe how would you measure and alert to ensure SLOs 
 are accomplished.
 
-Having the metrics in prometheus would help us to configure alerts using Alertmanager and make them reach Opsgenie to warn our support team. In the alert I would include a link to a Grafana Dashboard that would show in a Graph the problem and when started.
+If we want to ensure SLOs related to request response time, we need to have those metrics in Prometheus and of course after that we nee to configure alerts using Alertmanager, Grafana or the tool you prefer and make them reach Opsgenie to warn our support team. In the alert I would include a link to a Grafana Dashboard that would show in a Graph the problem and when started.
 
-I usually recommend to have other types of graphs in our Grafana Dashboard to even anticipate these kind of alerts, as CPU/Memory usage, number of requests, requests time avg, replicas available, current replicas vs. maximum replicas of the HPA, etc. This kind of Dashboards and other alerts could warn us even before having a critical failure and prevent them.
+![SLO Graph](./slo-graph.png)
+
+I usually recommend to have other types of graphs in our Grafana Dashboard to even anticipate these kind of alerts, as CPU/Memory usage, number of requests, requests time avg, replicas available, current replicas vs. maximum replicas of the HPA, etc. This kind of Dashboards and other alerts could warn us even before having a critical failure that could compromise our SLOs and prevent them.
 
 ![Grafana Example](./grafana-example.png)
 
